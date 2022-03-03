@@ -45,14 +45,6 @@
                         {
                             "Type": "Question",
                             "QuestionID": "QID1"
-                        },
-                        {
-                            "Type": "Question",
-                            "QuestionID": "QID2"
-                        },
-                        {
-                            "Type": "Question",
-                            "QuestionID": "QID3"
                         }
                     ]
                 },
@@ -64,7 +56,7 @@
                     "BlockElements": [
                         {
                             "Type": "Question",
-                            "QuestionID": "QID4"
+                            "QuestionID": "QID2"
                         }
                     ]
                 },
@@ -74,6 +66,14 @@
                     "Description": "Block 4",
                     "ID": "BL_4",
                     "BlockElements": [
+                        {
+                            "Type": "Question",
+                            "QuestionID": "QID3"
+                        },
+                        {
+                            "Type": "Question",
+                            "QuestionID": "QID4"
+                        },
                         {
                             "Type": "Question",
                             "QuestionID": "QID5"
@@ -206,7 +206,7 @@
             "Payload": {
                 "TriggerAction": "EmailMessage",
                 "Type": "OnSurveyComplete",
-                "ToEmail": "${q://QID2/ChoiceTextEntryValue}",
+                "ToEmail": "${q://QID4/ChoiceTextEntryValue}",
                 "FromName": "lbha@ucdavis.edu",
                 "FromEmail": "trigger@qemailserver.com",
                 "SendDate": "now",
@@ -296,121 +296,12 @@
             "SurveyID": "SV_9KnnHSHqD3voJ3E",
             "Element": "SQ",
             "PrimaryAttribute": "QID1",
-            "SecondaryAttribute": "Name",
-            "TertiaryAttribute": null,
-            "Payload": {
-                "QuestionText": "<h4>Name</h4>",
-                "DefaultChoices": false,
-                "DataExportTag": "Q1",
-                "QuestionType": "TE",
-                "Selector": "SL",
-                "Configuration": {
-                    "QuestionDescriptionOption": "UseText"
-                },
-                "QuestionDescription": "Name",
-                "Validation": {
-                    "Settings": {
-                        "ForceResponse": "ON",
-                        "ForceResponseType": "ON",
-                        "Type": "None"
-                    }
-                },
-                "GradingData": [],
-                "Language": [],
-                "NextChoiceId": 4,
-                "NextAnswerId": 1,
-                "SearchSource": {
-                    "AllowFreeResponse": "false"
-                },
-                "QuestionID": "QID1"
-            }
-        },
-        {
-            "SurveyID": "SV_9KnnHSHqD3voJ3E",
-            "Element": "SQ",
-            "PrimaryAttribute": "QID2",
-            "SecondaryAttribute": "Email",
-            "TertiaryAttribute": null,
-            "Payload": {
-                "QuestionText": "<h4>Email</h4>",
-                "DefaultChoices": false,
-                "DataExportTag": "Q2",
-                "QuestionType": "TE",
-                "Selector": "SL",
-                "Configuration": {
-                    "QuestionDescriptionOption": "UseText"
-                },
-                "QuestionDescription": "Email",
-                "Validation": {
-                    "Settings": {
-                        "ForceResponse": "ON",
-                        "ForceResponseType": "ON",
-                        "Type": "ContentType",
-                        "MinChars": "1",
-                        "ContentType": "ValidEmail",
-                        "ValidDateType": "DateWithFormat",
-                        "ValidPhoneType": "ValidUSPhone",
-                        "ValidZipType": "ValidUSZip",
-                        "ValidNumber": {
-                            "Min": "",
-                            "Max": "",
-                            "NumDecimals": ""
-                        }
-                    }
-                },
-                "GradingData": [],
-                "Language": [],
-                "NextChoiceId": 4,
-                "NextAnswerId": 1,
-                "SearchSource": {
-                    "AllowFreeResponse": "false"
-                },
-                "QuestionID": "QID2"
-            }
-        },
-        {
-            "SurveyID": "SV_9KnnHSHqD3voJ3E",
-            "Element": "SQ",
-            "PrimaryAttribute": "QID3",
-            "SecondaryAttribute": "Accessibility Needs",
-            "TertiaryAttribute": null,
-            "Payload": {
-                "QuestionText": "<h4>Accessibility Needs</h4>",
-                "DefaultChoices": false,
-                "DataExportTag": "Q3",
-                "QuestionType": "TE",
-                "Selector": "SL",
-                "Configuration": {
-                    "QuestionDescriptionOption": "UseText"
-                },
-                "QuestionDescription": "Accessibility Needs",
-                "Validation": {
-                    "Settings": {
-                        "ForceResponse": "OFF",
-                        "ForceResponseType": "OFF",
-                        "Type": "None"
-                    }
-                },
-                "GradingData": [],
-                "Language": [],
-                "NextChoiceId": 4,
-                "NextAnswerId": 1,
-                "SearchSource": {
-                    "AllowFreeResponse": "false"
-                },
-                "QuestionID": "QID3"
-            }
-        },
-        {
-            "SurveyID": "SV_9KnnHSHqD3voJ3E",
-            "Element": "SQ",
-            "PrimaryAttribute": "QID4",
             "SecondaryAttribute": "Select which events you would like to attend by tapping the corresponding boxes. In the text fields of the selected events, enter the number of tickets you would like (<b>1-2 only</b>).",
             "TertiaryAttribute": null,
             "Payload": {
                 "QuestionText": "Select which events you would like to attend by tapping the corresponding boxes. In the text fields of the selected events, enter the number of tickets you would like (<b>1-2 only</b>).",
                 "DefaultChoices": false,
-                "DataExportTag": "Q4",
+                "DataExportTag": "Q1",
                 "QuestionType": "MC",
                 "Selector": "MACOL",
                 "Configuration": {
@@ -583,7 +474,7 @@
                 "Language": [],
                 "NextChoiceId": 22,
                 "NextAnswerId": 1,
-                "QuestionID": "QID4",
+                "QuestionID": "QID1",
                 "DataVisibility": {
                     "Private": false,
                     "Hidden": false
@@ -595,98 +486,98 @@
         {
             "SurveyID": "SV_9KnnHSHqD3voJ3E",
             "Element": "SQ",
-            "PrimaryAttribute": "QID5",
+            "PrimaryAttribute": "QID2",
             "SecondaryAttribute": "Rank your selected events in order of preference by dragging the choices to reorder their ranks.",
             "TertiaryAttribute": null,
             "Payload": {
                 "QuestionText": "Rank your selected events in order of preference by dragging the choices to reorder their ranks.",
                 "DefaultChoices": {
                     "x1": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/1}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/1}",
                         "Value": "1"
                     },
                     "x2": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/2}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/2}",
                         "Value": "2"
                     },
                     "x3": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/3}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/3}",
                         "Value": "3"
                     },
                     "x4": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/4}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/4}",
                         "Value": "4"
                     },
                     "x5": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/5}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/5}",
                         "Value": "5"
                     },
                     "x6": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/6}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/6}",
                         "Value": "6"
                     },
                     "x7": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/7}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/7}",
                         "Value": "7"
                     },
                     "x8": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/8}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/8}",
                         "Value": "8"
                     },
                     "x9": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/9}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/9}",
                         "Value": "9"
                     },
                     "x10": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/10}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/10}",
                         "Value": "10"
                     },
                     "x11": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/11}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/11}",
                         "Value": "11"
                     },
                     "x12": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/12}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/12}",
                         "Value": "12"
                     },
                     "x13": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/13}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/13}",
                         "Value": "13"
                     },
                     "x14": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/14}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/14}",
                         "Value": "14"
                     },
                     "x15": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/15}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/15}",
                         "Value": "15"
                     },
                     "x16": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/16}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/16}",
                         "Value": "16"
                     },
                     "x17": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/17}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/17}",
                         "Value": "17"
                     },
                     "x18": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/18}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/18}",
                         "Value": "18"
                     },
                     "x19": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/19}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/19}",
                         "Value": "19"
                     },
                     "x20": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/20}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/20}",
                         "Value": "20"
                     },
                     "x21": {
-                        "Text": "${q://QID4/ChoiceTextEntryValue/21}",
+                        "Text": "${q://QID1/ChoiceTextEntryValue/21}",
                         "Value": "21"
                     }
                 },
-                "DataExportTag": "Q5",
+                "DataExportTag": "Q2",
                 "QuestionType": "RO",
                 "Selector": "DND",
                 "Configuration": {
@@ -704,10 +595,10 @@
                 "Language": [],
                 "NextChoiceId": 1,
                 "NextAnswerId": 1,
-                "QuestionID": "QID5",
+                "QuestionID": "QID2",
                 "DynamicChoices": {
                     "DynamicType": "ChoiceGroup",
-                    "Locator": "q://QID4/ChoiceGroup/SelectedChoices",
+                    "Locator": "q://QID1/ChoiceGroup/SelectedChoices",
                     "Type": "Dynamic"
                 },
                 "DynamicChoicesData": [],
@@ -717,6 +608,115 @@
                 },
                 "SubSelector": "TX",
                 "QuestionJS": "Qualtrics.SurveyEngine.addOnload(function()\n{\n\t/*Place your JavaScript here to run when the page loads*/\n\n});\n\nQualtrics.SurveyEngine.addOnReady(function()\n{\n\t/*Place your JavaScript here to run when the page is fully displayed*/\n\tjQuery(\"#\"+this.questionId+\" .InputText\").hide();\n\n});\n\nQualtrics.SurveyEngine.addOnUnload(function()\n{\n\t/*Place your JavaScript here to run when the page is unloaded*/\n\n});"
+            }
+        },
+        {
+            "SurveyID": "SV_9KnnHSHqD3voJ3E",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID3",
+            "SecondaryAttribute": "Name",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "<h4>Name</h4>",
+                "DefaultChoices": false,
+                "DataExportTag": "Q3",
+                "QuestionType": "TE",
+                "Selector": "SL",
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText"
+                },
+                "QuestionDescription": "Name",
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "ON",
+                        "ForceResponseType": "ON",
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 4,
+                "NextAnswerId": 1,
+                "SearchSource": {
+                    "AllowFreeResponse": "false"
+                },
+                "QuestionID": "QID3"
+            }
+        },
+        {
+            "SurveyID": "SV_9KnnHSHqD3voJ3E",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID4",
+            "SecondaryAttribute": "Email",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "<h4>Email</h4>",
+                "DefaultChoices": false,
+                "DataExportTag": "Q4",
+                "QuestionType": "TE",
+                "Selector": "SL",
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText"
+                },
+                "QuestionDescription": "Email",
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "ON",
+                        "ForceResponseType": "ON",
+                        "Type": "ContentType",
+                        "MinChars": "1",
+                        "ContentType": "ValidEmail",
+                        "ValidDateType": "DateWithFormat",
+                        "ValidPhoneType": "ValidUSPhone",
+                        "ValidZipType": "ValidUSZip",
+                        "ValidNumber": {
+                            "Min": "",
+                            "Max": "",
+                            "NumDecimals": ""
+                        }
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 4,
+                "NextAnswerId": 1,
+                "SearchSource": {
+                    "AllowFreeResponse": "false"
+                },
+                "QuestionID": "QID4"
+            }
+        },
+        {
+            "SurveyID": "SV_9KnnHSHqD3voJ3E",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID5",
+            "SecondaryAttribute": "Accessibility Needs",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "<h4>Accessibility Needs</h4>",
+                "DefaultChoices": false,
+                "DataExportTag": "Q5",
+                "QuestionType": "TE",
+                "Selector": "SL",
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText"
+                },
+                "QuestionDescription": "Accessibility Needs",
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "OFF",
+                        "ForceResponseType": "OFF",
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 4,
+                "NextAnswerId": 1,
+                "SearchSource": {
+                    "AllowFreeResponse": "false"
+                },
+                "QuestionID": "QID5"
             }
         }
     ]

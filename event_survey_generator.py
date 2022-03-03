@@ -20,7 +20,7 @@ num_events = len(events)
 
 survey_id = "SV_9KnnHSHqD3voJ3E"
 survey_owner_id = "UR_3WUHDMGK0A1YPvo"
-email_q_id = 2
+email_q_id = 4
 
 survey_directions = "In this survey, you will select Spring Quarter Mondavi Center events that you are interested in attending, the number of tickets requested, and a ranking prioritizing which events you would most like to attend."
 select_question_text = "Select which events you would like to attend by tapping the corresponding boxes. In the text fields of the selected events, enter the number of tickets you would like (<b>1-2 only</b>)."
@@ -303,6 +303,130 @@ survey_elements.append(pg1_description)
 
 question_count += 1
 
+event_select_question = {
+    "SurveyID": survey_id,
+    "Element": "SQ",
+    "PrimaryAttribute": "QID{}".format(question_count),
+    "SecondaryAttribute": "{}".format(select_question_text),
+    "TertiaryAttribute": None,
+    "Payload": {
+        "QuestionText": "{}".format(select_question_text),
+        "DefaultChoices": False,
+        "DataExportTag": "Q{}".format(question_count),
+        "QuestionType": "MC",
+        "Selector": "MACOL",
+        "Configuration": {
+            "QuestionDescriptionOption": "UseText",
+            "NumColumns": 2
+        },
+        "QuestionDescription": "{}".format(select_question_text),
+        "Choices": {},
+        "ChoiceOrder": list(range(1, num_events + 1)),
+        "Validation": {
+            "Settings": {
+                "ForceResponse": "ON",
+                "ForceResponseType": "ON",
+                "Type": "MinChoices",
+                "MinChoices": "1",
+                "MaxChoices": str(num_events),
+                "CustomValidation": None
+            }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": num_events + 1,
+        "NextAnswerId": 1,
+        "QuestionID": "QID{}".format(question_count),
+        "DataVisibility": {
+            "Private": False,
+            "Hidden": False
+        },
+        "DynamicChoicesData": [],
+        "SubSelector": "TX"
+    }
+}
+
+for i in range(1, num_events + 1):
+    formatted_date = dates[i - 1].strftime("%-m/%d/%Y")
+    formatted_time = times[i - 1].strftime("%-I:%M %p")
+    event_display = "<center><a href = '{}' target = '_blank'>{}</a><br><br> {} | {} </center>".format(links[i - 1], events[i - 1], formatted_date, formatted_time)
+    event_select_question["Payload"]["Choices"][i] = {
+        "Display": event_display,
+        "TextEntry": "true",
+        "TextEntryValidation": "ValidNumber",
+        "TextEntryForceResponse": True
+    }
+
+survey_elements.append(event_select_question)
+
+pg1_q_ids = range(question_count + 1)
+survey_blocks_payload[block_num] = create_block(block_num, pg1_q_ids)
+survey_flow_payload["Flow"].append(create_flow(block_num, flow_num))
+
+selected_qid = question_count
+question_count += 1
+block_num += 1
+flow_num += 1
+
+ranking_question = {
+    "SurveyID": survey_id,
+    "Element": "SQ",
+    "PrimaryAttribute": "QID{}".format(question_count),
+    "SecondaryAttribute": "{}".format(ranking_question_text),
+    "TertiaryAttribute": None,
+    "Payload": {
+        "QuestionText": "{}".format(ranking_question_text),
+        "DefaultChoices": {},
+        "DataExportTag": "Q{}".format(question_count),
+        "QuestionType": "RO",
+        "Selector": "DND",
+        "Configuration": {
+            "QuestionDescriptionOption": "UseText"
+        },
+        "QuestionDescription": "{}".format(ranking_question_text),
+        "Choices": [],
+        "ChoiceOrder": [],
+        "Validation": {
+            "Settings": {
+                "ForceResponse": "ON"
+            }
+        },
+        "GradingData": [],
+        "Language": [],
+        "NextChoiceId": 1,
+        "NextAnswerId": 1,
+        "QuestionID": "QID{}".format(question_count),
+        "DynamicChoices": {
+            "DynamicType": "ChoiceGroup",
+            "Locator": "q://QID{}/ChoiceGroup/SelectedChoices".format(selected_qid),
+            "Type": "Dynamic"
+        },
+        "DynamicChoicesData": [],
+        "DataVisibility": {
+            "Private": False,
+            "Hidden": False
+        },
+        "SubSelector": "TX",
+        "QuestionJS": "Qualtrics.SurveyEngine.addOnload(function()\n{\n\t/*Place your JavaScript here to run when the page loads*/\n\n});\n\nQualtrics.SurveyEngine.addOnReady(function()\n{\n\t/*Place your JavaScript here to run when the page is fully displayed*/\n\tjQuery(\"#\"+this.questionId+\" .InputText\").hide();\n\n});\n\nQualtrics.SurveyEngine.addOnUnload(function()\n{\n\t/*Place your JavaScript here to run when the page is unloaded*/\n\n});"
+    }
+}
+
+for i in range(1, num_events + 1):
+    ranking_question["Payload"]["DefaultChoices"]["x{}".format(i)] = {
+        "Text": "${q://QID" + str(selected_qid) + "/ChoiceTextEntryValue/" + str(i) + "}",
+        "Value": str(i)
+    }
+
+survey_elements.append(ranking_question)
+
+pg2_q_ids = [question_count]
+survey_blocks_payload[block_num] = create_block(block_num, pg2_q_ids)
+survey_flow_payload["Flow"].append(create_flow(block_num, flow_num))
+
+question_count += 1
+block_num += 1
+flow_num += 1
+
 name_question = {
     "SurveyID": survey_id,
     "Element": "SQ",
@@ -422,133 +546,8 @@ accessibility_question = {
 }
 survey_elements.append(accessibility_question)
 
-question_count += 1
-
-pg1_q_ids = range(question_count)
+pg1_q_ids = range(3, question_count + 1)
 survey_blocks_payload[block_num] = create_block(block_num, pg1_q_ids)
-survey_flow_payload["Flow"].append(create_flow(block_num, flow_num))
-
-block_num += 1
-flow_num += 1
-
-event_select_question = {
-    "SurveyID": survey_id,
-    "Element": "SQ",
-    "PrimaryAttribute": "QID{}".format(question_count),
-    "SecondaryAttribute": "{}".format(select_question_text),
-    "TertiaryAttribute": None,
-    "Payload": {
-        "QuestionText": "{}".format(select_question_text),
-        "DefaultChoices": False,
-        "DataExportTag": "Q{}".format(question_count),
-        "QuestionType": "MC",
-        "Selector": "MACOL",
-        "Configuration": {
-            "QuestionDescriptionOption": "UseText",
-            "NumColumns": 2
-        },
-        "QuestionDescription": "{}".format(select_question_text),
-        "Choices": {},
-        "ChoiceOrder": list(range(1, num_events + 1)),
-        "Validation": {
-            "Settings": {
-                "ForceResponse": "ON",
-                "ForceResponseType": "ON",
-                "Type": "MinChoices",
-                "MinChoices": "1",
-                "MaxChoices": str(num_events),
-                "CustomValidation": None
-            }
-        },
-        "GradingData": [],
-        "Language": [],
-        "NextChoiceId": num_events + 1,
-        "NextAnswerId": 1,
-        "QuestionID": "QID{}".format(question_count),
-        "DataVisibility": {
-            "Private": False,
-            "Hidden": False
-        },
-        "DynamicChoicesData": [],
-        "SubSelector": "TX"
-    }
-}
-
-for i in range(1, num_events + 1):
-    formatted_date = dates[i - 1].strftime("%-m/%d/%Y")
-    formatted_time = times[i - 1].strftime("%-I:%M %p")
-    event_display = "<center><a href = '{}' target = '_blank'>{}</a><br><br> {} | {} </center>".format(links[i - 1], events[i - 1], formatted_date, formatted_time)
-    event_select_question["Payload"]["Choices"][i] = {
-        "Display": event_display,
-        "TextEntry": "true",
-        "TextEntryValidation": "ValidNumber",
-        "TextEntryForceResponse": True
-    }
-
-survey_elements.append(event_select_question)
-
-pg2_q_ids = [question_count]
-survey_blocks_payload[block_num] = create_block(block_num, pg2_q_ids)
-survey_flow_payload["Flow"].append(create_flow(block_num, flow_num))
-
-selected_qid = question_count
-question_count += 1
-block_num += 1
-flow_num += 1
-
-ranking_question = {
-    "SurveyID": survey_id,
-    "Element": "SQ",
-    "PrimaryAttribute": "QID{}".format(question_count),
-    "SecondaryAttribute": "{}".format(ranking_question_text),
-    "TertiaryAttribute": None,
-    "Payload": {
-        "QuestionText": "{}".format(ranking_question_text),
-        "DefaultChoices": {},
-        "DataExportTag": "Q{}".format(question_count),
-        "QuestionType": "RO",
-        "Selector": "DND",
-        "Configuration": {
-            "QuestionDescriptionOption": "UseText"
-        },
-        "QuestionDescription": "{}".format(ranking_question_text),
-        "Choices": [],
-        "ChoiceOrder": [],
-        "Validation": {
-            "Settings": {
-                "ForceResponse": "ON"
-            }
-        },
-        "GradingData": [],
-        "Language": [],
-        "NextChoiceId": 1,
-        "NextAnswerId": 1,
-        "QuestionID": "QID{}".format(question_count),
-        "DynamicChoices": {
-            "DynamicType": "ChoiceGroup",
-            "Locator": "q://QID{}/ChoiceGroup/SelectedChoices".format(selected_qid),
-            "Type": "Dynamic"
-        },
-        "DynamicChoicesData": [],
-        "DataVisibility": {
-            "Private": False,
-            "Hidden": False
-        },
-        "SubSelector": "TX",
-        "QuestionJS": "Qualtrics.SurveyEngine.addOnload(function()\n{\n\t/*Place your JavaScript here to run when the page loads*/\n\n});\n\nQualtrics.SurveyEngine.addOnReady(function()\n{\n\t/*Place your JavaScript here to run when the page is fully displayed*/\n\tjQuery(\"#\"+this.questionId+\" .InputText\").hide();\n\n});\n\nQualtrics.SurveyEngine.addOnUnload(function()\n{\n\t/*Place your JavaScript here to run when the page is unloaded*/\n\n});"
-    }
-}
-
-for i in range(1, num_events + 1):
-    ranking_question["Payload"]["DefaultChoices"]["x{}".format(i)] = {
-        "Text": "${q://QID" + str(selected_qid) + "/ChoiceTextEntryValue/" + str(i) + "}",
-        "Value": str(i)
-    }
-
-survey_elements.append(ranking_question)
-
-pg3_q_ids = [question_count]
-survey_blocks_payload[block_num] = create_block(block_num, pg3_q_ids)
 survey_flow_payload["Flow"].append(create_flow(block_num, flow_num))
 
 with open(survey_file, "w") as f:
