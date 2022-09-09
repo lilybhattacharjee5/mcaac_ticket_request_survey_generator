@@ -3,11 +3,11 @@ import json
 from datetime import datetime
 
 #### EVENT SURVEY GENERATOR PARAMETERS
-survey_name = "Mondavi Center Spring Quarter Events for MCAAC"
+survey_name = "Mondavi Center Fall Quarter Events for MCAAC"
 survey_file = "{}.qsf".format(survey_name)
 
-events_data = pd.read_excel("Mondavi Center Spring Quarter Events for MCAAC.xlsx")
-events_data.columns = ["event_name", "date", "time", "link", "notes"]
+events_data = pd.read_excel("Mondavi Center Fall Quarter Events for MCAAC.xlsx", header = None)
+events_data.columns = ["event_name", "date", "time", "link"] #, "notes"]
 events_data = events_data.loc[(events_data["event_name"].notna()) & (events_data["date"].notna())]
 
 events = list(events_data["event_name"])
@@ -22,7 +22,7 @@ survey_id = "SV_9KnnHSHqD3voJ3E"
 survey_owner_id = "UR_3WUHDMGK0A1YPvo"
 email_q_id = 4
 
-survey_directions = "In this survey, you will select Spring Quarter Mondavi Center events that you are interested in attending, the number of tickets requested, and a ranking prioritizing which events you would most like to attend."
+survey_directions = "In this survey, you will select Fall Quarter Mondavi Center events that you are interested in attending, the number of tickets requested, and a ranking prioritizing which events you would most like to attend."
 select_question_text = "Select which events you would like to attend by tapping the corresponding boxes. In the text fields of the selected events, enter the number of tickets you would like (<b>1-2 only</b>)."
 ranking_question_text = "Rank your selected events in order of preference by dragging the choices to reorder their ranks."
 
@@ -122,7 +122,7 @@ survey_info = [
         "SecondaryAttribute": None,
         "TertiaryAttribute": None,
         "Payload": {
-            "BackButton": "false",
+            "BackButton": "true",
             "SaveAndContinue": "true",
             "SurveyProtection": "PublicSurvey",
             "BallotBoxStuffingPrevention": "false",
@@ -196,12 +196,12 @@ survey_info = [
       "Payload": {
         "TriggerAction": "EmailMessage",
         "Type": "OnSurveyComplete",
-        "ToEmail": "${q://QID" + str(email_q_id) + "/ChoiceTextEntryValue}",
+        "ToEmail": "${q://QID4/ChoiceTextEntryValue}",
         "FromName": "lbha@ucdavis.edu",
-        "FromEmail": "trigger@qemailserver.com",
+        "FromEmail": "lbha@ucdavis.edu",
         "SendDate": "now",
-        "Subject": "{} Responses".format(survey_name),
-        "Message": "",
+        "Subject": "[MCAAC] Mondavi Center Fall Quarter Events for MCAAC Responses",
+        "Message": "<p>Dear ${q://QID3/ChoiceTextEntryValue},</p>\nThank you for filling out the Mondavi Center Fall Quarter Events Survey! A summary of your responses is below.<br />\n<br />\nBest,<br />\nMCAAC Ticket Allocations Committee",
         "IncludeReport": True,
         "UseFullText": True,
         "ID": "TR_elXawPjSoXqEGmG"
